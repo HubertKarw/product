@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeset:
+      id: 1
+      author: HubertKarw
+      changes:
+        - createTable:
+            tableName: Product
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: PRODUCT_NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TYPE
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRICE
+                  type: NUMERIC
+                  constraints:
+                    nullable: false
+

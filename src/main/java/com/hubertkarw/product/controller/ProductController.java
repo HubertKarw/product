@@ -1,6 +1,7 @@
 package com.hubertkarw.product.controller;
 
 
+import com.hubertkarw.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,4 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
+    private final ProductService service;
+
+
 }

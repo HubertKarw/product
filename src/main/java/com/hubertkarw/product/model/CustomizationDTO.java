@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomizationDTO {
+    private long id;
     private String name;
     private String type;
     private BigDecimal price;

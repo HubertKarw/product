@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/custom")
+@RequestMapping("/customs")
 public class CustomizationController {
 }

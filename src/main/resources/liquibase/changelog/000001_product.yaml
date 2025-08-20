@@ -1,10 +1,10 @@
 databaseChangeLog:
-  - changeset:
+  - changeSet:
       id: 1
       author: HubertKarw
       changes:
         - createTable:
-            tableName: Product
+            tableName: PRODUCT
             columns:
               - column:
                   name: ID
@@ -30,7 +30,7 @@ databaseChangeLog:
                     nullable: false
 
         - createTable:
-            tableName: Customization
+            tableName: CUSTOMIZATION
             columns:
               - column:
                   name: ID
@@ -76,14 +76,14 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: PRODUCT_CUSTOMIZATION
-            baseColumNames: PRODUCT_ID
+            baseColumnNames: PRODUCT_ID
             referencedTableName: PRODUCT
             referencedColumnNames: ID
-            constraintName: CASCADE
+            constraintName: fk_product_customization_product
 
         - addForeignKeyConstraint:
             baseTableName: PRODUCT_CUSTOMIZATION
-            baseColumNames: CUSTOMIZATION_ID
+            baseColumnNames: CUSTOMIZATION_ID
             referencedTableName: CUSTOMIZATION
             referencedColumnNames: ID
-            constraintName: CASCADE
+            constraintName: fk_product_customization_customization

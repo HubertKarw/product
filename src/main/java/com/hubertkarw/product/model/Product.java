@@ -20,7 +20,7 @@ public class Product {
     private BigDecimal price;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "PRODUCT_CUSTOMIZATION",
-    joinColumns = @JoinColumn(name = "PRODUCT_ID"),
-    inverseJoinColumns = @JoinColumn(name = "CUSTOMIZATION_ID"))
+            joinColumns = @JoinColumn(name = "PRODUCT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CUSTOMIZATION_ID"))
     private List<Customization> customizations;
 }

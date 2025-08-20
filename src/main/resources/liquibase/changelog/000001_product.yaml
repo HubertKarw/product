@@ -14,7 +14,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: PRODUCT_NAME
+                  name: NAME
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
@@ -29,3 +29,61 @@ databaseChangeLog:
                   constraints:
                     nullable: false
 
+        - createTable:
+            tableName: Customization
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TYPE
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRICE
+                  type: NUMERIC
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRODUCT_ID
+                  type: BIGINT
+
+        - createTable:
+            tableName: PRODUCT_CUSTOMIZATION
+            columns:
+              - column:
+                  name: PRODUCT_ID
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: CUSTOMIZATION_ID
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: PRODUCT_CUSTOMIZATION
+            baseColumNames: PRODUCT_ID
+            referencedTableName: PRODUCT
+            referencedColumnNames: ID
+            constraintName: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: PRODUCT_CUSTOMIZATION
+            baseColumNames: CUSTOMIZATION_ID
+            referencedTableName: CUSTOMIZATION
+            referencedColumnNames: ID
+            constraintName: CASCADE

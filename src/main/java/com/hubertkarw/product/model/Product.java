@@ -25,4 +25,10 @@ public class Product {
             joinColumns = @JoinColumn(name = "PRODUCT_ID"),
             inverseJoinColumns = @JoinColumn(name = "CUSTOMIZATION_ID"))
     private List<Customization> customizations;
+
+    public void updateProduct(ProductCreateDTO updatedProduct) {
+        this.name = updatedProduct.getName();
+        this.type = updatedProduct.getType();
+        this.price = updatedProduct.getPrice();
+    }
 }

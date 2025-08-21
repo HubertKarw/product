@@ -14,5 +14,5 @@ public class ProductCreateDTO {
     private String name;
     private String type;
     private BigDecimal price;
-    private List<CustomizationDTO> customizations;
+    private List<CustomizationCreateDTO> customizations;
 }

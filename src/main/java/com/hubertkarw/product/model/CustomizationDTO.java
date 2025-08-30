@@ -14,4 +14,5 @@ public class CustomizationDTO {
     private String name;
     private String type;
     private BigDecimal price;
+    private long productId;
 }

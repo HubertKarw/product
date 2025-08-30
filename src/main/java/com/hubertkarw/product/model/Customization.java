@@ -20,4 +20,11 @@ public class Customization {
     private String name;
     private String type;
     private BigDecimal price;
+    private Long productId;
+
+    public void updateCustomization(CustomizationCreateDTO customizationCreateDTO){
+        this.name = customizationCreateDTO.getName();
+        this.type = customizationCreateDTO.getType();
+        this.price = customizationCreateDTO.getPrice();
+    }
 }

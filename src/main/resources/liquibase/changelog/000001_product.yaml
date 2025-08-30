@@ -87,3 +87,10 @@ databaseChangeLog:
             referencedTableName: CUSTOMIZATION
             referencedColumnNames: ID
             constraintName: fk_product_customization_customization
+
+        - addForeignKeyConstraint:
+            baseTableName: CUSTOMIZATION
+            baseColumnNames: PRODUCT_ID
+            referencedTableName: PRODUCT
+            referencedColumnNames: ID
+            constraintName: fk_customization_product

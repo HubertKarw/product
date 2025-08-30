@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomizationDTO {
-    private long id;
+    private Long id;
     private String name;
     private String type;
     private BigDecimal price;
-    private long productId;
+    private Long productId;
 }

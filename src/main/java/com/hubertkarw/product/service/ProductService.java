@@ -9,6 +9,7 @@ import com.hubertkarw.product.repository.CustomizationRepository;
 import com.hubertkarw.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,10 +31,12 @@ public class ProductService {
         return mapper.toDTO(product);
     }
 
+    @Transactional
     public ProductDTO addProduct(ProductCreateDTO productDTO) {
         return mapper.toDTO(repository.save(mapper.toEntity(productDTO)));
     }
 
+    @Transactional
     public ProductDTO updateProduct(Long id, ProductCreateDTO productDTO) {
         Product product = repository.findById(id)
                 .orElseThrow(()-> new ProductNotFoundException("product not found"));
@@ -42,6 +45,7 @@ public class ProductService {
         return mapper.toDTO(repository.save(product));
     }
 
+    @Transactional
     public void deleteProduct(Long id) {
         Product product = repository.findById(id)
                 .orElseThrow(()-> new ProductNotFoundException("product not found"));
@@ -53,6 +57,7 @@ public class ProductService {
         return customizationMapper.toDTOList(product.getCustomizations());
     }
 
+    @Transactional
     public ProductDTO addProductCustomization(Long productID, Long customizationId){
         Product product = repository.findById(productID)
                 .orElseThrow(()-> new ProductNotFoundException("product not found"));
@@ -62,6 +67,7 @@ public class ProductService {
         return mapper.toDTO(repository.save(product));
     }
 
+    @Transactional
     public void deleteProductCustomization(Long productID, Long customizationId){
         Product product = repository.findById(productID)
                 .orElseThrow(()-> new ProductNotFoundException("product not found"));
@@ -71,6 +77,7 @@ public class ProductService {
         repository.save(product);
     }
 
+    @Transactional
     public ProductDTO assignCustomizationAsProduct(Long customizationId){
         Customization customization = customizationRepository.findById(customizationId)
                 .orElseThrow(()-> new CustomizationNotFountException("customization not found"));

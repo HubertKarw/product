@@ -16,7 +16,7 @@ import java.util.List;
 public class Customization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String type;
     private BigDecimal price;
@@ -26,5 +26,23 @@ public class Customization {
         this.name = customizationCreateDTO.getName();
         this.type = customizationCreateDTO.getType();
         this.price = customizationCreateDTO.getPrice();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Customization))
+            return false;
+
+        Customization other = (Customization) o;
+
+        return id != null &&
+                id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

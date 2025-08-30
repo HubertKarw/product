@@ -16,7 +16,7 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String type;
     private BigDecimal price;
@@ -30,5 +30,23 @@ public class Product {
         this.name = updatedProduct.getName();
         this.type = updatedProduct.getType();
         this.price = updatedProduct.getPrice();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Product))
+            return false;
+
+        Product other = (Product) o;
+
+        return id != null &&
+                id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

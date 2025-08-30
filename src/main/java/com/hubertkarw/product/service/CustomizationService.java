@@ -8,6 +8,7 @@ import com.hubertkarw.product.model.CustomizationDTO;
 import com.hubertkarw.product.repository.CustomizationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,10 +28,12 @@ public class CustomizationService {
         return mapper.toDTO(customization);
     }
 
+    @Transactional
     public CustomizationDTO addCustomization(CustomizationCreateDTO customizationCreateDTO) {
         return mapper.toDTO(repository.save(mapper.toEntity(customizationCreateDTO)));
     }
 
+    @Transactional
     public CustomizationDTO updateCustomization(Long id, CustomizationCreateDTO customizationCreateDTO) {
         Customization customization = repository.findById(id)
                 .orElseThrow(()-> new CustomizationNotFountException("customization not found"));
@@ -38,6 +41,7 @@ public class CustomizationService {
         return mapper.toDTO(repository.save(customization));
     }
 
+    @Transactional
     public void deleteCustomization(Long id) {
         Customization customization = repository.findById(id)
                 .orElseThrow(()-> new CustomizationNotFountException("customization not found"));

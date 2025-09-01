@@ -154,7 +154,7 @@ public class CustomizationServiceTest {
         //given
         when(repository.findById(any())).thenReturn(Optional.empty());
         //then
-        ProductAppException exception = Assertions.assertThrows(ProductAppException.class, ()-> service.getCustomization(1L));
+        ProductAppException exception = Assertions.assertThrows(ProductAppException.class, ()-> service.deleteCustomization(1L));
         assertEquals("customization not found", exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
     }

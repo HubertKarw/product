@@ -1,6 +1,7 @@
 package com.hubertkarw.product.controller;
 
 
+import com.hubertkarw.product.model.CartItemRequest;
 import com.hubertkarw.product.model.CustomizationDTO;
 import com.hubertkarw.product.model.ProductCreateDTO;
 import com.hubertkarw.product.model.ProductDTO;
@@ -35,7 +36,7 @@ public class ProductController {
     })
     @GetMapping
     List<ProductDTO> getProducts(@Parameter(description = "Filtering by type") @RequestParam(required = false) String type) {
-        log.info(type==null?"GET /products requested":"GET /products?type={} requested",type);
+        log.info(type == null ? "GET /products requested" : "GET /products?type={} requested", type);
         return service.getProducts(type);
     }
 
@@ -62,13 +63,13 @@ public class ProductController {
                     schema = @Schema(implementation = ProductCreateDTO.class),
                     examples = @ExampleObject(value =
                             """
-                            {
-                            "name": "Laptop XYZ",
-                            "type": "computer",
-                            "price": 123.12,
-                            "customizations": {}
-                            }
-                            """)))
+                                    {
+                                    "name": "Laptop XYZ",
+                                    "type": "computer",
+                                    "price": 123.12,
+                                    "customizations": {}
+                                    }
+                                    """)))
                           @RequestBody ProductCreateDTO productDTO) {
         log.info("POST /products requested body={}", productDTO);
         return service.addProduct(productDTO);
@@ -86,18 +87,19 @@ public class ProductController {
                                      content = @Content(mediaType = "application/json",
                                              schema = @Schema(implementation = ProductCreateDTO.class),
                                              examples = @ExampleObject(value =
-                                                        """
-                                                        {
-                                                        "name": "Laptop XYZ",
-                                                        "type": "computer",
-                                                        "price": 123.12,
-                                                        "customizations": {}
-                                                        }
-                                                        """)))
+                                                     """
+                                                             {
+                                                             "name": "Laptop XYZ",
+                                                             "type": "computer",
+                                                             "price": 123.12,
+                                                             "customizations": {}
+                                                             }
+                                                             """)))
                              @RequestBody ProductCreateDTO productDTO) {
         log.info("PUT /products/{} requested body={}", id, productDTO);
         return service.updateProduct(id, productDTO);
     }
+
     @Operation(summary = "Delete product")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Removed product")
@@ -118,6 +120,7 @@ public class ProductController {
         log.info("GET /product/{}/customization requested", id);
         return service.getProductCustomizations(id);
     }
+
     @Operation(summary = "Add customization for given product")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Added Customization", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ProductDTO.class))})
@@ -138,6 +141,7 @@ public class ProductController {
         log.info("DELETE /products/{}/customization/{} requested", id, customizationId);
         service.deleteProductCustomization(id, customizationId);
     }
+
     @Operation(summary = "Add customization as product")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Added Customization as product", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ProductDTO.class))})
@@ -146,6 +150,21 @@ public class ProductController {
     ProductDTO assignCustomizationAsProduct(@PathVariable("id") long id) {
         log.info("POST /products/customization/{} requested", id);
         return service.assignCustomizationAsProduct(id);
+    }
+
+    @Operation(summary = "Add product to Cart")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Added product to Cart", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = CartItemRequest.class))})
+    })
+    @PostMapping("/{id}/add-to-cart/{cartId}")
+    CartItemRequest addProductToCart(@PathVariable("id") long id,
+                                     @PathVariable("cartId") long cartId,
+                                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                             description = "List of customizations chosen",
+                                             required = true,
+                                             content = @Content(mediaType = "application/json"))
+                                     @RequestBody List<Long> customizationIds){
+        return service.addProductToCart(id,cartId,customizationIds);
     }
 
 }

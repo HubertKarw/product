@@ -1,5 +1,6 @@
 package com.hubertkarw.product.service;
 
+import com.hubertkarw.product.client.CartClient;
 import com.hubertkarw.product.exception.ProductAppException;
 import com.hubertkarw.product.mapper.CustomizationMapper;
 import com.hubertkarw.product.mapper.CustomizationMapperImpl;
@@ -34,12 +35,14 @@ public class ProductServiceTest {
     ProductRepository repository;
     CustomizationMapper customizationMapper = new CustomizationMapperImpl();
     ProductMapper mapper = new ProductMapperImpl();
+    CartClient client;
 
     @BeforeEach
     void setup() {
         this.repository = Mockito.mock(ProductRepository.class);
         this.customizationRepository = Mockito.mock(CustomizationRepository.class);
-        this.service = new ProductService(repository,customizationRepository, mapper, customizationMapper);
+        this.client = Mockito.mock(CartClient.class);
+        this.service = new ProductService(repository,customizationRepository, mapper, customizationMapper,client);
     }
 
     @Test

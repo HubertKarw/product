@@ -1,0 +1,48 @@
+package com.hubertkarw.product.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "CUSTOMIZATION")
+public class Customization {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String type;
+    private BigDecimal price;
+    private Long productId;
+
+    public void updateCustomization(CustomizationCreateDTO customizationCreateDTO){
+        this.name = customizationCreateDTO.getName();
+        this.type = customizationCreateDTO.getType();
+        this.price = customizationCreateDTO.getPrice();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Customization))
+            return false;
+
+        Customization other = (Customization) o;
+
+        return id != null &&
+                id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+}
